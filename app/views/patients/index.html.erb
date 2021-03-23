@@ -1,0 +1,33 @@
+<div class="row mt-4">
+  <div class="col-sm-8 offset-sm-2">
+    <h1>All Patients</h1>
+
+
+    <%= button_to "Fetch Patient Lab", patients_path, class: "btn btn-success" %>
+
+
+    <ul>
+      <% @patients.each do |patient| %>
+        <li><%= patient.id_number %></li>
+        <ul>
+          <% patient.patient_labs.each do |patient_lab| %>
+            <li><%= patient_lab.lab_number %></li>
+            <li>
+              <% patient_lab.lab_studies.each do |lb| %>
+                <div>
+                  <% lb.each do |key, value| %>
+                   <p><%= "#{key} : #{value}" %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+
+
