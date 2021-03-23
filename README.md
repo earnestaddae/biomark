@@ -1,24 +1,13 @@
-# README
+# Biomark
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application fetches `API` from laboratories and makes a database entry into PatientLab model, belonging to a Patient.
 
-Things you may want to cover:
+### How to run application:
 
-* Ruby version
+* Clone the repository
 
-* System dependencies
+* Make sure you have Docker installed
 
-* Configuration
+* Navigate to the application and run `docker-compose up`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Open your browser and visit `localhost:3000`
