@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 @import "bootstrap";
 @import "font-awesome";
 @import "rails_bootstrap_forms";
+
+body {
+  font-family: "Nunito";
+}
 
 a.new,
 a.edit,

@@ -1,30 +1,44 @@
-<div class="row mt-4">
-  <div class="col-sm-8 offset-sm-2">
+<div class="row mt-4 mb-4">
+  <div class="col-sm-10 offset-sm-2">
     <h1>All Patients</h1>
 
 
     <%= button_to "Fetch Patient Lab", patients_path, class: "btn btn-success" %>
+  </div>
+</div>
 
-
-    <ul>
-      <% @patients.each do |patient| %>
-        <li><%= patient.id_number %></li>
-        <ul>
-          <% patient.patient_labs.each do |patient_lab| %>
-            <li><%= patient_lab.lab_number %></li>
-            <li>
-              <% patient_lab.lab_studies.each do |lb| %>
-                <div>
-                  <% lb.each do |key, value| %>
-                   <p><%= "#{key} : #{value}" %></p>
-                  <% end %>
-                </div>
-              <% end %>
-            </li>
+<div class="container">
+  <div class="row">
+  <% @patients.each do |patient| %>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+        <h5>Patient Details</h5>
+         <p>ID: <%= patient.id_number %></p>
+         <p>Name: <%= patient.first_name %> </p>
+         <p>Gender: <%= patient.gender %></p>
+        </div>
+        <div class="card-body">
+          <h5>Patient Lab</h5>
+        <% patient.patient_labs.each do |patient_lab| %>
+          <p>Lab number: <%= patient_lab.lab_number %></p>
+          <p>Clinic code: <%= patient_lab.clinic_code %></p>
+          <p>Date of test: <%= patient_lab.date_of_test.strftime("%A, %D, %I:%M:%S %p") %></p>
+        </div>
+        <div class="card-footer">
+          <h6>Lab Studies</h6>
+          <% patient_lab.lab_studies.each do |lb| %>
+            <div>
+              <% lb.each do |key, value| %>
+                <strong><%= key %></strong>: <%= value %> &nbsp;
+                <% end %>
+              </div>
+            <% end %>
+          </div>
           <% end %>
-        </ul>
-      <% end %>
-    </ul>
+      </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
