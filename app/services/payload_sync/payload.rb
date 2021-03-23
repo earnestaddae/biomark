@@ -1,5 +1,5 @@
 module PayloadSync
-  module Payloads
+  class Payload
     response_1 =  {
       "date_of_test": "20210227134300",
       "id_number": "IC000A2",
@@ -47,6 +47,8 @@ module PayloadSync
         }
       ]
     }
+
+
     PAYLOADS = [response_1, response_2]
 
       def self.sync!
@@ -58,6 +60,7 @@ module PayloadSync
       end
 
       private
+
         def self.create_patient(payload)
           unless Patient.exists?(id_number: payload[:id_number] || payload[:patient_data][:id_number])
             patient = Patient.create!(

@@ -5,7 +5,7 @@ class PatientsController < ApplicationController
   end
 
   def create
-    PayloadSync::Payloads.sync!
+    PayloadSync::Payload.sync!
 
     redirect_to root_url, notice: "Patient lab created."
   end
