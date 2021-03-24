@@ -1,3 +1,5 @@
+require 'json'
+
 module PayloadSync
   class Payload
     response_1 =  {
@@ -49,18 +51,28 @@ module PayloadSync
     }
 
 
-    PAYLOADS = [response_1, response_2]
+    payloads = [response_1, response_2]
+    @structured_data = []
 
-      def self.sync!
-        remote_labs = PAYLOADS
-        remote_labs.each do |remote_lab|
-          patient = create_patient(remote_lab)
-          create_patient_lab(patient, remote_lab)
-        end
+    # generates structured data
+    def generate_structured_data
+      payloads.each do |payload|
+        gen = JSON.generate(payload)
+        @structured_data << JSON.parse(gen, {symbolize_names: true})
       end
+    end
+
+    # sync all data from labs
+    def self.sync!
+      remote_labs = @structured_data
+      remote_labs.each do |remote_lab|
+        patient = create_patient(remote_lab)
+        create_patient_lab(patient, remote_lab)
+      end
+    end
 
       private
-
+        # creates a patient entry
         def self.create_patient(payload)
           unless Patient.exists?(id_number: payload[:id_number] || payload[:patient_data][:id_number])
             patient = Patient.create!(
@@ -75,6 +87,7 @@ module PayloadSync
           patient
         end
 
+        # creates a patient lab with the respective patient
         def self.create_patient_lab(patient, payload)
          if !patient.nil?
             patient.patient_labs.create!(
