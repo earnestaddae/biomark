@@ -6,7 +6,7 @@ This application fetches `API` from laboratories and makes a database entry into
 
 * Clone the repository
 
-* Make sure you have Docker installed
+* Make sure you have Docker installed & running
 
 * Navigate to the application and run `docker-compose up`
 
